@@ -2,59 +2,51 @@ import React from 'react'
 import "./topbar.css";
 import { Link } from "react-router-dom";
 const TopBar = () => {
-  return (
-        <div className="top">
-        {/* <div className="topLeft">
-            <a href="https://www.uach.cl/" target="_blank" className="topLogoLink">
-                Hola
-            </a>
-        </div> */}
-    <div className="topCenter">
-        <ul className="topList">
-        <li className="topListItem">
-            <Link className="link" to="/Indicadores">
-            Indicadores
-            </Link>
-            
-        </li>
+    return (
+            <div className="top">
         
-        <li className="topListItem">
-            <Link className="link" to="/metricas">
-            Metricas
-            </Link>
+            <div className="topCenter">
+                <ul className="topList">
+                <li className="topListItem">
+                    <Link className="link" to="/indicadores">
+                    Indicadores
+                    </Link>
+                </li>
+                
+                <li className="topListItem">
+                    <Link className="link" to="/metricas">
+                    Metricas
+                    </Link>
+                </li>
+        
+                <li className="topListItem">
+                    <Link className="link" to="/metas">
+                    Metas
+                    </Link>
+                </li>
+                </ul>
+            </div>
             
-        </li>
-
-        <li className="topListItem">
-            <Link className="link" to="/metas">
-            Metas
-            </Link>
-            
-        </li>
-
-        <li className="topListItem">
-            <Link className="link" to="/peticiones">
-            Peticiones
-            </Link>
-            
-            
-        </li>
-
-        <li className="topListItem">
-            <Link className="link" to="/datos">
-            Datos
-            </Link>
-            
-        </li>
-        </ul>
-    </div>
-    {/* <div className="topRight">
-        <Link to="/settings">
-            "Hola"
-        </Link>
-    </div> */}
-    </div>
-  )
+                <div className="topRight">
+                <li className="topListItem">
+                    <Link className="link" to="/peticiones">
+                    Solicitudes
+                    </Link>
+                </li>
+        
+                <li className="topListItem">
+                    <Link className="link" to="/datos">
+                    Indicadores
+                    </Link>
+                </li>
+                </div>
+            {/* <div className="topRight">
+                <Link to="/settings">
+                    "Hola"
+                </Link>
+            </div> */}
+            </div>
+    );
 }
 
 export default TopBar

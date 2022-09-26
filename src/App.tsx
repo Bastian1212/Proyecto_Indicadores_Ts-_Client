@@ -5,7 +5,7 @@ import Metricas from './pages/Metricas';
 import Metas from './pages/Metas';
 import Peticiones from './pages/Peticiones';
 import Datos from './pages/Datos';
-
+import HistorialPeticiones from "./pages/HistorialPeticiones";
 import { IndicadoresProvider } from './context/IndicadoresProvider';
 
 import AddIndicador from './components/Indicador/AddIndicador';
@@ -15,7 +15,6 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-     
         <Router>
           <TopBar />
           <Routes >
@@ -24,6 +23,7 @@ function App() {
             <Route path="/metas" element={<Metas/>}/>
             <Route path="/peticiones" element={<Peticiones/>}/> 
             <Route path="/datos" element={<Datos/>}/> 
+            <Route path="/historial-peticiones" element={<HistorialPeticiones/>}/>
           </Routes >
       </Router>
     
