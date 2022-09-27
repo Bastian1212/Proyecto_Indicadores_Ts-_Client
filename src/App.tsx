@@ -6,6 +6,8 @@ import Metas from './pages/Metas';
 import Peticiones from './pages/Peticiones';
 import Datos from './pages/Datos';
 import HistorialPeticiones from "./pages/HistorialPeticiones";
+
+
 import { IndicadoresProvider } from './context/IndicadoresProvider';
 
 import AddIndicador from './components/Indicador/AddIndicador';
@@ -15,18 +17,20 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-        <Router>
-          <TopBar />
-          <Routes >
-            <Route path="/indicadores" element={<Indicadores/>}/>
-            <Route path="/metricas" element={<Metricas/>}/>
-            <Route path="/metas" element={<Metas/>}/>
-            <Route path="/peticiones" element={<Peticiones/>}/> 
-            <Route path="/datos" element={<Datos/>}/> 
-            <Route path="/historial-peticiones" element={<HistorialPeticiones/>}/>
-          </Routes >
-      </Router>
-    
+      <IndicadoresProvider>
+          <Router>
+            <TopBar />
+            <Routes >
+              <Route path="/indicadores" element={<Indicadores/>}/>
+              <Route path="/metricas" element={<Metricas/>}/>
+              <Route path="/metas" element={<Metas/>}/>
+              <Route path="/peticiones" element={<Peticiones/>}/> 
+              <Route path="/datos" element={<Datos/>}/> 
+              <Route path="/historial-peticiones" element={<HistorialPeticiones/>}/>
+            </Routes >
+        </Router>
+      </IndicadoresProvider>
+      
   )
 
 }

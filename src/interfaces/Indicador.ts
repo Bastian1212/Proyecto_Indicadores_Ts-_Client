@@ -15,3 +15,7 @@ export interface Indicador{
 
 
 }
+
+export interface IndicadoresState {
+    listaIndicadores: Indicador[]
+}

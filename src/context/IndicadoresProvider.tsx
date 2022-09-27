@@ -1,22 +1,11 @@
-import React, {createContext, useState } from 'react'
+import React, { useState , useReducer } from 'react'
 import {IndicadoresContext} from "./IndicadoresContxt"
-import { Indicador } from '../interfaces/Indicador'
+import { Indicador, IndicadoresState } from '../interfaces/Indicador'
 import PropTypes from 'prop-types'
+import { IndicadoresReducer } from './IndicadoresReducer'
 
-const INITIAL_STATE: Indicador ={
-    id: '',
-    CalificacionCORFO: 'minimo',
-    NumeroIndicador: '',
-    MisionUniversitaria: 'Primera',
-    nombre: '',
-    TipoIndicador: 'Entrada resultado',
-    eje: 'Gobernanza y Sinergias',
-    Unidad: '',
-    FuenteInformacion: '',
-    Responsable: '',
-    Frecuencia: '',
-    idMetrica: 0,
-    idMeta: 0
+const INITIAL_STATE: IndicadoresState ={
+    listaIndicadores : [] 
 }
 
 
@@ -26,14 +15,14 @@ interface props {
 
 const IndicadoresProvider = ({children} :  props)  => {
 
-    const [indicador, setIndicador] = useState(INITIAL_STATE);
-    const [indicadores , setIndicadores] = useState([]);
+    
+    
+    const [indicadoresState  , dispatch] = useReducer(IndicadoresReducer , INITIAL_STATE )
 
     return (
         <IndicadoresContext.Provider
             value={{
-                indicador,
-                setIndicador
+                indicadoresState
 
             }}
         >
