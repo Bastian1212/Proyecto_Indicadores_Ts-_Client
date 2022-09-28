@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-
+import clienteAxios from "../../../config/axios"
 class AddIndicador extends React.Component {
   state = {
     CalificacionCORFO : 'Mínimo',
@@ -16,9 +16,9 @@ class AddIndicador extends React.Component {
     idMetrica: 0,
     idMeta: 0
   }
-
+  
   onAddClick = () => {
-    axios.post('http://opentera.inf.uach.cl:82/indicadores/addindicadores',{
+      clienteAxios.post("/indicadores/addindicadores" , {
       id: (this.state.CalificacionCORFO.charAt(0) + this.state.NumeroIndicador), //string.charAt(0)
       CalificacionCORFO : this.state.CalificacionCORFO,
       NumeroIndicador : this.state.NumeroIndicador,

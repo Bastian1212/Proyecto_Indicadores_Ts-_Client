@@ -5,14 +5,48 @@ import { Link } from "react-router-dom";
 import HistorialIndicadores from '../components/HistorialPeticion/HistorialIndicador';
 import HistorialMetricas from '../components/HistorialPeticion/HistorialMetas';
 import HistorialMetas from '../components/HistorialPeticion/HistorialMetrica';
+import clienteAxios from '../../config/axios';
+
 
 function HistorialPeticines() {
 
 
-    // const [indicadores, setIndicadores] = useState([]);
-    // const [metricas, setMetricas] = useState([]);
-    // const [metas, setMetas] = useState([]);
-    // const [historial, setHistorial] = useState([]);
+    const [indicadores, setIndicadores] = useState([]);
+    const [metricas, setMetricas] = useState([]);
+    const [metas, setMetas] = useState([]);
+    const [historial, setHistorial] = useState([]);
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+        const res = await clienteAxios.get('/indicadores/lista');
+        setIndicadores(res.data);
+        };
+        fetchPosts();
+    }, );
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            const res = await clienteAxios.get('/metricas/lista');
+            setMetricas(res.data);
+        };
+        fetchPosts();
+        }, );
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            const res = await clienteAxios.get('/metas/lista');
+            setMetas(res.data);
+        };
+        fetchPosts();
+        }, );
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            const res = await clienteAxios.get('/historial/lista');
+            setHistorial(res.data);
+        };
+        fetchPosts();
+        }, );
 
     return (
             <div className="container">

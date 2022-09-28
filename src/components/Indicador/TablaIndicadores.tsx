@@ -1,7 +1,21 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import clienteAxios from '../../../config/axios';
 function TablaIndicadores() {
     const [indicadores, setIndicadores] = useState([]);
+
+
+    
+
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+        const res = await clienteAxios.get('/indicadores/lista');
+        setIndicadores(res.data);
+        };
+        fetchPosts();
+    }, );
+    
 
     return (
         <table>

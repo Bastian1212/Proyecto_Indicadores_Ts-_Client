@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import clienteAxios from '../../../config/axios';
 
 
 function TablaMeta( props : any) {
@@ -10,7 +10,7 @@ function TablaMeta( props : any) {
 
     useEffect(() => {
         const fetchPosts = async () => {
-        const res = await axios.get('http://opentera.inf.uach.cl:82/metas/lista');
+        const res = await clienteAxios.get('/metas/lista');
         setMetas(res.data);
         };
         fetchPosts();

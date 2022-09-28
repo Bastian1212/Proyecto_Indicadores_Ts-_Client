@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from "axios";
 import { useEffect, useState } from "react";
+import clienteAxios from '../../../config/axios';
 
 function TablaMetrica(props : any) {
 
@@ -8,7 +9,7 @@ function TablaMetrica(props : any) {
 
     useEffect(() => {
         const fetchPosts = async () => {
-        const res = await axios.get('http://opentera.inf.uach.cl:82/metricas/lista');
+        const res = await clienteAxios.get('/metricas/lista');
         setMetricas(res.data);
         };
         fetchPosts();
@@ -31,7 +32,7 @@ function TablaMetrica(props : any) {
                     <td>
                     {/* <button className="button muted-button">Edit</button> */}
                     <button className="button muted-button delete" onClick={() => 
-                        axios.put(`http://opentera.inf.uach.cl:82/metricas/setpeticion/${metrica.id}`,
+                        clienteAxios.put(`/metricas/setpeticion/${metrica.id}`,
                         window.location.reload(true))
                         }>Eliminar</button>
                     </td>

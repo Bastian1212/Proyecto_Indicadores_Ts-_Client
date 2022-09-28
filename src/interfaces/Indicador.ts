@@ -17,5 +17,7 @@ export interface Indicador{
 }
 
 export interface IndicadoresState {
-    listaIndicadores: Indicador[]
+    listaIndicadores: Indicador[],
+    Indicador : Indicador
+    
 }

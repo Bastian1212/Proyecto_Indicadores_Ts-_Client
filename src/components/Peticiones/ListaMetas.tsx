@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-
+import clienteAxios from '../../../config/axios'
 class ListaMetas extends React.Component {    
 
   state = {
@@ -10,19 +10,19 @@ class ListaMetas extends React.Component {
 
   onAprobarClick = () => {
     for(let i=0; i < this.state.idMetasA.length ; i++){ 
-        axios.put(`http://opentera.inf.uach.cl:82/metas/setaprobado/${this.state.idMetasA[i]}`)
+        clienteAxios.put(`/metas/setaprobado/${this.state.idMetasA[i]}`)
     }
     for(let i=0; i < this.state.idMetasD.length ; i++){ 
-        axios.delete(`http://opentera.inf.uach.cl:82/metas/deletemetas/${this.state.idMetasD[i]}`)
+        clienteAxios.delete(`/metas/deletemetas/${this.state.idMetasD[i]}`)
     }
   }
 
   onRechazarClick = () => {
     for(let i=0; i < this.state.idMetasA.length ; i++){ 
-        axios.delete(`http://opentera.inf.uach.cl:82/metas/deletemetas/${this.state.idMetasA[i]}`)
+        clienteAxios.delete(`/metas/deletemetas/${this.state.idMetasA[i]}`)
     }
     for(let i=0; i < this.state.idMetasD.length ; i++){ 
-        axios.put(`http://opentera.inf.uach.cl:82/metas/setaprobado/${this.state.idMetasD[i]}`)
+        clienteAxios.put(`/metas/setaprobado/${this.state.idMetasD[i]}`)
     }
   }
 

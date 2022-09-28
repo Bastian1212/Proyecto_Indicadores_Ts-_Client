@@ -5,11 +5,18 @@ import TablaMeta from '../components/Metas/TablaMeta';
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import clienteAxios from '../../config/axios';
 
 const Metas = () => {
     const [indicadores, setIndicadores] = useState([]);
 
+    useEffect(() => {
+        const fetchPosts = async () => {
+        const res = await clienteAxios.get('/indicadores/lista');
+        setIndicadores(res.data);
+        };
+        fetchPosts();
+    }, );
 
     
 

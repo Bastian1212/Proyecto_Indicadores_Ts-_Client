@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+import clienteAxios from '../../config/axios';
 export default function Datos() {
 
     const [indicadores, setIndicadores] = useState([]);
@@ -10,7 +11,7 @@ export default function Datos() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-        const res = await axios.get('http://opentera.inf.uach.cl:82/indicadores/lista');
+        const res = await clienteAxios.get('/indicadores/lista');
         setIndicadores(res.data);
         };
         fetchPosts();
@@ -18,7 +19,7 @@ export default function Datos() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-        const res = await axios.get('http://opentera.inf.uach.cl:82/metricas/lista');
+        const res = await clienteAxios.get('/metricas/lista');
         setMetricas(res.data);
         };
         fetchPosts();
@@ -26,7 +27,7 @@ export default function Datos() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-        const res = await axios.get('http://opentera.inf.uach.cl:82/metas/lista');
+        const res = await clienteAxios.get('metas/lista');
         setMetas(res.data);
         };
         fetchPosts();

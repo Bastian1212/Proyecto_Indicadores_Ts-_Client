@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 
+
+import clienteAxios from '../../../config/axios'
 class ListaMetricas extends React.Component {    
 
     state = {
@@ -10,19 +12,19 @@ class ListaMetricas extends React.Component {
 
     onAprobarClick = () => {
         for(let i=0; i < this.state.idMetricasA.length ; i++){ 
-            axios.put(`http://opentera.inf.uach.cl:82/metricas/setaprobado/${this.state.idMetricasA[i]}`)
+            clienteAxios.put(`/metricas/setaprobado/${this.state.idMetricasA[i]}`)
         }
         for(let i=0; i < this.state.idMetricasD.length ; i++){ 
-            axios.delete(`http://opentera.inf.uach.cl:82/metricas/deletemetricas/${this.state.idMetricasD[i]}`)
+            clienteAxios.delete(`/metricas/deletemetricas/${this.state.idMetricasD[i]}`)
         }
     }
 
     onRechazarClick = () => {
         for(let i=0; i < this.state.idMetricasA.length ; i++){ 
-            axios.delete(`http://opentera.inf.uach.cl:82/metricas/deletemetricas/${this.state.idMetricasA[i]}`)
+            clienteAxios.delete(`/metricas/deletemetricas/${this.state.idMetricasA[i]}`)
         }
         for(let i=0; i < this.state.idMetricasD.length ; i++){ 
-            axios.put(`http://opentera.inf.uach.cl:82/metricas/setaprobado/${this.state.idMetricasD[i]}`)
+            clienteAxios.put(`/metricas/setaprobado/${this.state.idMetricasD[i]}`)
         }
     }
 

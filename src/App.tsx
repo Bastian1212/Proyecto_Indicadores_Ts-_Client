@@ -6,8 +6,7 @@ import Metas from './pages/Metas';
 import Peticiones from './pages/Peticiones';
 import Datos from './pages/Datos';
 import HistorialPeticiones from "./pages/HistorialPeticiones";
-
-
+import Test from './pages/Test';
 import { IndicadoresProvider } from './context/IndicadoresProvider';
 
 import AddIndicador from './components/Indicador/AddIndicador';
@@ -27,6 +26,7 @@ function App() {
               <Route path="/peticiones" element={<Peticiones/>}/> 
               <Route path="/datos" element={<Datos/>}/> 
               <Route path="/historial-peticiones" element={<HistorialPeticiones/>}/>
+              <Route path="/test" element={<Test/>}/>
             </Routes >
         </Router>
       </IndicadoresProvider>

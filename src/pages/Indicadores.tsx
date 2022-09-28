@@ -4,14 +4,14 @@ import axios from "axios";
 
 import AddIndicador from '../components/Indicador/AddIndicador';
 import TablaIndicadores from '../components/Indicador/TablaIndicadores';
-
+import clienteAxios from '../../config/axios';
 
 function Indicadores() {
     const [metricas, setMetricas] = useState([]);
     const [metas, setMetas] = useState([]);
     useEffect(() => {
         const fetchPosts = async () => {
-          const res = await axios.get('http://opentera.inf.uach.cl:82/metricas/lista');
+          const res = await clienteAxios.get('/metricas/lista');
           setMetricas(res.data);
         };
         fetchPosts();
@@ -19,7 +19,7 @@ function Indicadores() {
     
       useEffect(() => {
         const fetchPosts = async () => {
-          const res = await axios.get('http://opentera.inf.uach.cl:82/metas/lista');
+          const res = await clienteAxios.get('/metas/lista');
           setMetas(res.data);
         };
         fetchPosts();

@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-
+import clienteAxios from '../../../config/axios'
 class AddMeta extends React.Component {
 
     state = {
@@ -10,11 +10,11 @@ class AddMeta extends React.Component {
     }
 
     onAddClick = () => {
-        axios.post('http://opentera.inf.uach.cl:82/metas/addmetas',{
+        clienteAxios.post('/metas/addmetas',{
         id : this.state.id,
         nombre : this.state.nombre
         })
-        axios.put('http://opentera.inf.uach.cl:82/indicadores/setmetas',{
+        clienteAxios.put('/indicadores/setmetas',{
         id : this.state.id,
         idIndicadores: this.state.idIndicadores
         })

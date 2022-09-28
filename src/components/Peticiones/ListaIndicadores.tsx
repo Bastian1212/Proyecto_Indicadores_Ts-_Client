@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-
+import clienteAxios from '../../../config/axios'
 class ListaIndicadores extends React.Component {    
 
     state = {
@@ -10,19 +10,19 @@ class ListaIndicadores extends React.Component {
 
     onAprobarClick = () => {
         for(let i=0; i < this.state.idIndicadoresA.length ; i++){ 
-            axios.put(`http://opentera.inf.uach.cl:82/indicadores/setaprobado/${this.state.idIndicadoresA[i]}`)
+            clienteAxios.put(`/indicadores/setaprobado/${this.state.idIndicadoresA[i]}`)
         }
         for(let i=0; i < this.state.idIndicadoresD.length ; i++){ 
-            axios.delete(`http://opentera.inf.uach.cl:82/indicadores/deleteindicadores/${this.state.idIndicadoresD[i]}`)
+            clienteAxios.delete(`/indicadores/deleteindicadores/${this.state.idIndicadoresD[i]}`)
         }
     }
 
     onRechazarClick = () => {
         for(let i=0; i < this.state.idIndicadoresA.length ; i++){ 
-            axios.delete(`http://opentera.inf.uach.cl:82/indicadores/deleteindicadores/${this.state.idIndicadoresA[i]}`)
+            clienteAxios.delete(`/indicadores/deleteindicadores/${this.state.idIndicadoresA[i]}`)
         }
         for(let i=0; i < this.state.idIndicadoresD.length ; i++){ 
-            axios.put(`http://opentera.inf.uach.cl:82/indicadores/setaprobado/${this.state.idIndicadoresD[i]}`)
+            clienteAxios.put(`/indicadores/setaprobado/${this.state.idIndicadoresD[i]}`)
         }
     }
 
