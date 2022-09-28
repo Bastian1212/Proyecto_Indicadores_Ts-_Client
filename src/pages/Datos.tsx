@@ -11,7 +11,7 @@ export default function Datos() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-        const res = await clienteAxios.get('/indicadores/lista');
+        const res = await clienteAxios.get('indicadores/lista');
         setIndicadores(res.data);
         };
         fetchPosts();
@@ -19,7 +19,7 @@ export default function Datos() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-        const res = await clienteAxios.get('/metricas/lista');
+        const res = await clienteAxios.get('metricas/lista');
         setMetricas(res.data);
         };
         fetchPosts();

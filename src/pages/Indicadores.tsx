@@ -11,7 +11,7 @@ function Indicadores() {
     const [metas, setMetas] = useState([]);
     useEffect(() => {
         const fetchPosts = async () => {
-          const res = await clienteAxios.get('/metricas/lista');
+          const res = await clienteAxios.get('metricas/lista');
           setMetricas(res.data);
         };
         fetchPosts();
@@ -19,7 +19,7 @@ function Indicadores() {
     
       useEffect(() => {
         const fetchPosts = async () => {
-          const res = await clienteAxios.get('/metas/lista');
+          const res = await clienteAxios.get('metas/lista');
           setMetas(res.data);
         };
         fetchPosts();
@@ -30,7 +30,7 @@ function Indicadores() {
           <div className="flex-row">
             <div className="flex-large">
               <h2>Añadir Indicador</h2>
-              <AddIndicador/>
+              <AddIndicador metricas={metricas} metas={metas}/>
             </div>
             <div className="flex-large">
               <h2>Ver Indicadores</h2>

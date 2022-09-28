@@ -10,19 +10,19 @@ class ListaMetas extends React.Component {
 
   onAprobarClick = () => {
     for(let i=0; i < this.state.idMetasA.length ; i++){ 
-        clienteAxios.put(`/metas/setaprobado/${this.state.idMetasA[i]}`)
+        clienteAxios.put(`metas/setaprobado/${this.state.idMetasA[i]}`)
     }
     for(let i=0; i < this.state.idMetasD.length ; i++){ 
-        clienteAxios.delete(`/metas/deletemetas/${this.state.idMetasD[i]}`)
+        clienteAxios.delete(`metas/deletemetas/${this.state.idMetasD[i]}`)
     }
   }
 
   onRechazarClick = () => {
     for(let i=0; i < this.state.idMetasA.length ; i++){ 
-        clienteAxios.delete(`/metas/deletemetas/${this.state.idMetasA[i]}`)
+        clienteAxios.delete(`metas/deletemetas/${this.state.idMetasA[i]}`)
     }
     for(let i=0; i < this.state.idMetasD.length ; i++){ 
-        clienteAxios.put(`/metas/setaprobado/${this.state.idMetasD[i]}`)
+        clienteAxios.put(`metas/setaprobado/${this.state.idMetasD[i]}`)
     }
   }
 
@@ -48,7 +48,7 @@ class ListaMetas extends React.Component {
                     <th>Petición</th>
                 </tr>
                 </thead>
-                {/* <tbody>
+                <tbody>
                 {this.props.metas.map((meta) => (
                     meta.Aprobado === 0 ?
 
@@ -106,7 +106,7 @@ class ListaMetas extends React.Component {
                     <div/>
                     ))
                 }
-                </tbody> */}
+                </tbody>
             </table>
             
             <div className="flex-row" style={{paddingTop : '25px'}}>

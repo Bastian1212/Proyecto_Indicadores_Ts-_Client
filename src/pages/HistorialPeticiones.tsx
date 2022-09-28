@@ -18,7 +18,7 @@ function HistorialPeticines() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-        const res = await clienteAxios.get('/indicadores/lista');
+        const res = await clienteAxios.get('indicadores/lista');
         setIndicadores(res.data);
         };
         fetchPosts();
@@ -26,7 +26,7 @@ function HistorialPeticines() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const res = await clienteAxios.get('/metricas/lista');
+            const res = await clienteAxios.get('metricas/lista');
             setMetricas(res.data);
         };
         fetchPosts();
@@ -34,7 +34,7 @@ function HistorialPeticines() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const res = await clienteAxios.get('/metas/lista');
+            const res = await clienteAxios.get('metas/lista');
             setMetas(res.data);
         };
         fetchPosts();
@@ -42,7 +42,7 @@ function HistorialPeticines() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const res = await clienteAxios.get('/historial/lista');
+            const res = await clienteAxios.get('historial/lista');
             setHistorial(res.data);
         };
         fetchPosts();
@@ -54,13 +54,13 @@ function HistorialPeticines() {
             <div className="flex-row">
             <div className="flex-large">
                 <h2>Indicadores</h2>
-                <HistorialIndicadores />
+                <HistorialIndicadores indicadores={indicadores} historial={historial}/>
             
                 <h2>Métricas</h2>
-                <HistorialMetricas />
+                <HistorialMetricas metricas={metricas} indicadores={indicadores} historial={historial}/>
 
                 <h2>Metas</h2>
-                <HistorialMetas />
+                <HistorialMetas metas={metas} indicadores={indicadores} historial={historial}/>
 
             </div>
 

@@ -33,7 +33,7 @@ class HistorialIndicadores extends React.Component {
             <th>ㅤFechaㅤ</th>
         </tr>
         </thead>
-        {/* <tbody>
+        <tbody>
         {this.props.historial.map((historia) => (
             <tr>
             {this.props.indicadores.map((indicador) => (
@@ -68,7 +68,7 @@ class HistorialIndicadores extends React.Component {
             </tr>
         ))
         }
-        </tbody> */}
+        </tbody>
     </table>
 
     </div>

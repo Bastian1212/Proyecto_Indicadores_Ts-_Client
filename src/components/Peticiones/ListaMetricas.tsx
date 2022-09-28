@@ -12,19 +12,19 @@ class ListaMetricas extends React.Component {
 
     onAprobarClick = () => {
         for(let i=0; i < this.state.idMetricasA.length ; i++){ 
-            clienteAxios.put(`/metricas/setaprobado/${this.state.idMetricasA[i]}`)
+            clienteAxios.put(`metricas/setaprobado/${this.state.idMetricasA[i]}`)
         }
         for(let i=0; i < this.state.idMetricasD.length ; i++){ 
-            clienteAxios.delete(`/metricas/deletemetricas/${this.state.idMetricasD[i]}`)
+            clienteAxios.delete(`metricas/deletemetricas/${this.state.idMetricasD[i]}`)
         }
     }
 
     onRechazarClick = () => {
         for(let i=0; i < this.state.idMetricasA.length ; i++){ 
-            clienteAxios.delete(`/metricas/deletemetricas/${this.state.idMetricasA[i]}`)
+            clienteAxios.delete(`metricas/deletemetricas/${this.state.idMetricasA[i]}`)
         }
         for(let i=0; i < this.state.idMetricasD.length ; i++){ 
-            clienteAxios.put(`/metricas/setaprobado/${this.state.idMetricasD[i]}`)
+            clienteAxios.put(`metricas/setaprobado/${this.state.idMetricasD[i]}`)
         }
     }
 
@@ -50,7 +50,7 @@ class ListaMetricas extends React.Component {
                     <th>Petición</th>
                 </tr>
                 </thead>
-                {/* <tbody>
+                <tbody>
                 {this.props.metricas.map((metrica) => (
                     metrica.Aprobado === 0 ?
 
@@ -108,7 +108,7 @@ class ListaMetricas extends React.Component {
                     <div/>
                     ))
                 }
-                </tbody> */}
+                </tbody>
             </table>
             
             <div className="flex-row" style={{paddingTop : '25px'}}>

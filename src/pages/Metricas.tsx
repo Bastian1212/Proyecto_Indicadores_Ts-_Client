@@ -9,7 +9,7 @@ function Metricas() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const res = await clienteAxios.get('/indicadores/lista');
+            const res = await clienteAxios.get('indicadores/lista');
             setIndicadores(res.data);
         };
         fetchPosts();
@@ -21,11 +21,11 @@ function Metricas() {
                 <div className="flex-row">
                     <div className="flex-large">
                         <h2>Añadir Metrica</h2>
-                        <AddMetrica />
+                        <AddMetrica indicadores={indicadores} />
                     </div>
                     <div className="flex-large">
                         <h2>Ver Metrica</h2>
-                        <TablaMetrica/>
+                        <TablaMetrica indicadores={indicadores}/>
                         
                     </div>
         

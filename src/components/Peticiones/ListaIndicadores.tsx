@@ -10,19 +10,19 @@ class ListaIndicadores extends React.Component {
 
     onAprobarClick = () => {
         for(let i=0; i < this.state.idIndicadoresA.length ; i++){ 
-            clienteAxios.put(`/indicadores/setaprobado/${this.state.idIndicadoresA[i]}`)
+            clienteAxios.put(`indicadores/setaprobado/${this.state.idIndicadoresA[i]}`)
         }
         for(let i=0; i < this.state.idIndicadoresD.length ; i++){ 
-            clienteAxios.delete(`/indicadores/deleteindicadores/${this.state.idIndicadoresD[i]}`)
+            clienteAxios.delete(`indicadores/deleteindicadores/${this.state.idIndicadoresD[i]}`)
         }
     }
 
     onRechazarClick = () => {
         for(let i=0; i < this.state.idIndicadoresA.length ; i++){ 
-            clienteAxios.delete(`/indicadores/deleteindicadores/${this.state.idIndicadoresA[i]}`)
+            clienteAxios.delete(`indicadores/deleteindicadores/${this.state.idIndicadoresA[i]}`)
         }
         for(let i=0; i < this.state.idIndicadoresD.length ; i++){ 
-            clienteAxios.put(`/indicadores/setaprobado/${this.state.idIndicadoresD[i]}`)
+            clienteAxios.put(`indicadores/setaprobado/${this.state.idIndicadoresD[i]}`)
         }
     }
 
@@ -56,7 +56,7 @@ class ListaIndicadores extends React.Component {
                 <th>Petición</th>
             </tr>
             </thead>
-            {/* <tbody>
+            <tbody>
             {this.props.indicadores.map((indicador) => (
                 indicador.Aprobado === 0 ?
 
@@ -108,7 +108,7 @@ class ListaIndicadores extends React.Component {
                 <div/>
                 ))
             }
-            </tbody> */}
+            </tbody>
         </table>
         
         <div className="flex-row" style={{paddingTop : '25px'}}>

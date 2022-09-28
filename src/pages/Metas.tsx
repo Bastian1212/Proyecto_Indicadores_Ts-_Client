@@ -12,7 +12,7 @@ const Metas = () => {
 
     useEffect(() => {
         const fetchPosts = async () => {
-        const res = await clienteAxios.get('/indicadores/lista');
+        const res = await clienteAxios.get('indicadores/lista');
         setIndicadores(res.data);
         };
         fetchPosts();
@@ -25,11 +25,11 @@ const Metas = () => {
             <div className="flex-row">
                 <div className="flex-large">
                     <h2>Añadir Meta</h2>
-                    <AddMeta/>
+                    <AddMeta indicadores={indicadores}/>
                 </div>
                 <div className="flex-large">
                     <h2>Ver Meta</h2>
-                    <TablaMeta/>
+                    <TablaMeta indicadores={indicadores} />
                 </div>
             </div>
         </div>

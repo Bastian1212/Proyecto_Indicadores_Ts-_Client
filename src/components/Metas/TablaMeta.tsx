@@ -10,7 +10,7 @@ function TablaMeta( props : any) {
 
     useEffect(() => {
         const fetchPosts = async () => {
-        const res = await clienteAxios.get('/metas/lista');
+        const res = await clienteAxios.get('metas/lista');
         setMetas(res.data);
         };
         fetchPosts();

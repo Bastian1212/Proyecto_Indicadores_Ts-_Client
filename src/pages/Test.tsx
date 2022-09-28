@@ -6,15 +6,10 @@ const test = () => {
 
     const {indicadoresState} =  useContext(IndicadoresContext);
     const {Indicador} = indicadoresState
-    return (
-        <form>
-            <label>Calificación CORFO</label>
-            <select value={Indicador.CalificacionCORFO} onChange={() => {}}>
-            <option value="Mínimo">Mínimo</option>
-            <option value="Crítico">Crítico</option>
-            </select>
-        
-        </form>
+    return(
+        <div>
+            <h1>hola</h1>
+        </div>
     )
 }
 

@@ -18,7 +18,7 @@ class AddIndicador extends React.Component {
   }
   
   onAddClick = () => {
-      clienteAxios.post("/indicadores/addindicadores" , {
+      clienteAxios.post("indicadores/addindicadores" , {
       id: (this.state.CalificacionCORFO.charAt(0) + this.state.NumeroIndicador), //string.charAt(0)
       CalificacionCORFO : this.state.CalificacionCORFO,
       NumeroIndicador : this.state.NumeroIndicador,
