@@ -1,7 +1,9 @@
 import React from 'react'
 import axios from 'axios'
 import clienteAxios from "../../../config/axios"
-class AddIndicador extends React.Component {
+import Indicadores from '../../pages/Indicadores'
+import { Indicador } from '../../interfaces/Indicador'
+class AddIndicador extends React.Component   {
   state = {
     CalificacionCORFO : 'Mínimo',
     NumeroIndicador: '',
@@ -106,13 +108,13 @@ class AddIndicador extends React.Component {
         <select value={this.state.idMetrica} onChange={e => this.setState({
           idMetrica: e.target.value
         })}>
-          {/* <option value={0}>-</option>
+          <option value={0}>-</option>
           {this.props.metricas.map((x, i) =>
           x.Aprobado === 1 ?
           <option value={x.id}>{x.nombre}</option>
           :
           <div/>
-          )} */}
+          )}
         </select>
 
         <label>Meta</label>
@@ -120,12 +122,12 @@ class AddIndicador extends React.Component {
           idMeta: e.target.value
         })}>
           <option value={0}>-</option>
-          {/* {this.props.metas.map((x, i) => 
+          {this.props.metas.map((x, i) => 
           x.Aprobado === 1 ?
           <option value={x.id}>{x.nombre}</option>
           :
           <div/>
-          )} */}
+          )}
         </select>
 
         <button onClick={
@@ -136,4 +138,4 @@ class AddIndicador extends React.Component {
   }
 }
 
-export default AddIndicador;
+export default AddIndicador

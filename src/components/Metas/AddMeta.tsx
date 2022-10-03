@@ -35,7 +35,7 @@ class AddMeta extends React.Component {
 
     
         <label>Selecciona los indicadores correspondientes</label>
-            {/* {this.props.indicadores.map((x, i) => 
+            {this.props.indicadores.map((x, i) => 
             x.idMeta === 0 && x.Aprobado === 1? 
     
             <label key={i}>
@@ -48,7 +48,7 @@ class AddMeta extends React.Component {
                 }/> {x.id} ㅤㅤㅤㅤ  {x.nombre}
             </label>
             :
-            <div/>      )} */}
+            <div/>      )}
 
             <button onClick={
             () => this.onAddClick()
