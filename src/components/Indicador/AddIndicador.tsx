@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import swal from 'sweetalert'
+
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import clienteAxios from '../../../config/axios'
@@ -90,8 +92,13 @@ class AddIndicador extends React.Component {
           resp : false,
         })  
       }
-      toast.error('Error! los campos no se llenaron correctamente', 
-        {position: toast.POSITION.TOP_CENTER, autoClose: 1000});
+
+      swal({
+        text: "Error! los campos no se llenaron correctamente",
+        icon: "error",
+        timer: "2000"
+      })
+
     }else{
 
       clienteAxios.post('indicadores/addindicadores',{
@@ -128,8 +135,12 @@ class AddIndicador extends React.Component {
         resp: false,
         usado: false
       })
-      toast.success('Solicitud enviada correctamente', 
-        {position: toast.POSITION.TOP_CENTER, autoClose: 1000});
+      swal({
+        text: "'Solicitud enviada correctamente'",
+        icon: "success",
+        timer: "2000"
+      })
+
     }
   }
 
@@ -286,7 +297,6 @@ class AddIndicador extends React.Component {
       <button onClick={
           () => this.onAddClick()
         }>Enviar solicitud</button>
-      <ToastContainer theme="colored"/>
       </>
     );
   }
