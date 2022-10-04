@@ -1,132 +1,157 @@
 import React from 'react'
 import axios from 'axios'
-import clienteAxios from '../../../config/axios'
+import dateFormat, {masks} from "dateformat";
+import clienteAxios from '../../../config/axios';
 class ListaMetas extends React.Component {    
 
   state = {
     idMetasA: [],
-    idMetasD: []
+    idMetasD: [],
   }
 
   onAprobarClick = () => {
+    let today = dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss');
     for(let i=0; i < this.state.idMetasA.length ; i++){ 
-        clienteAxios.put(`metas/setaprobado/${this.state.idMetasA[i]}`)
+        clienteAxios.put(`metas/setaprobado/${this.state.idMetasA[i]}_Añadir_${today}`)
     }
     for(let i=0; i < this.state.idMetasD.length ; i++){ 
-        clienteAxios.delete(`metas/deletemetas/${this.state.idMetasD[i]}`)
+        clienteAxios.put(`metas/deletemetas/${this.state.idMetasD[i]}_Eliminar_${today}`)
     }
+    this.setState( {
+        idMetasA: [],
+        idMetasD: [],
+        fechasMetasA: [],
+        fechasMetasD: [],
+      })
   }
 
   onRechazarClick = () => {
+    let today = dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss');
     for(let i=0; i < this.state.idMetasA.length ; i++){ 
-        clienteAxios.delete(`metas/deletemetas/${this.state.idMetasA[i]}`)
+        clienteAxios.put(`metas/deletemetas/${this.state.idMetasA[i]}_Añadir_${today}`)
     }
     for(let i=0; i < this.state.idMetasD.length ; i++){ 
-        clienteAxios.put(`metas/setaprobado/${this.state.idMetasD[i]}`)
+        clienteAxios.put(`metas/setaprobado/${this.state.idMetasD[i]}_Eliminar_${today}`)
     }
+    this.setState( {
+        idMetasA: [],
+        idMetasD: []
+      })
   }
 
-    render(){
-        const AStyle = {
-            color: 'green'
-        };
+  AClick = (e) => {
+    this.state.idMetasA.includes(e.target.value) ? 
+                        this.state.idMetasA = this.state.idMetasA.filter((item) => item !== e.target.value) 
+                        : 
+                        this.state.idMetasA.push(e.target.value);
 
-        const DStyle = {
-            color: 'red'
-        };
+  }
 
-        return(
-            <div>
+  DClick = (e) => {
+    this.state.idMetasD.includes(e.target.value) ? 
+                        this.state.idMetasD = this.state.idMetasD.filter((item) => item !== e.target.value)
+                        : 
+                        this.state.idMetasD.push(e.target.value);
 
-            <table>
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Indicadores</th>
-                    <th>Petición</th>
-                </tr>
-                </thead>
-                <tbody>
-                {this.props.metas.map((meta) => (
-                    meta.Aprobado === 0 ?
+  }
 
-                    <tr key={meta.id}>
-                        {meta.Peticion === 'Añadir' ?
-                        <td>
-                            <input
-                            className='checkbox'
-                            type="checkbox"
-                            name="lang"
-                            value={meta.id}
-                            onChange={e => this.state.idMetasA.includes(e.target.value) ? this.state.idMetasA = this.state.idMetasA.filter((item) => 
-                                item !== e.target.value) 
-                                : 
-                                this.state.idMetasA.push(e.target.value)
-                            }/>
-                        </td>
-                        :
-                        <td>
-                            <input
-                            className='checkbox'
-                            type="checkbox"
-                            name="lang"
-                            value={meta.id}
-                            onChange={e => this.state.idMetasD.includes(e.target.value) ? this.state.idMetasD = this.state.idMetasD.filter((item) => 
-                                item !== e.target.value) 
-                                : 
-                                this.state.idMetasD.push(e.target.value)
-                            }/>
-                        </td>
-                        }
-                        <td>{meta.id}</td>
-                        <td>{meta.nombre}</td>
+  render(){
+    const AStyle = {
+        color: 'rgb(48, 147, 59)'
+    };
 
+    const DStyle = {
+        color: 'rgb(170, 25, 25)'
+    };
 
-                                <td>
-                                    {this.props.indicadores.map((indicador) => (
-                                        indicador.idMeta === meta.id ?
-                                            <div>
-                                            {indicador.id} ㅤㅤㅤㅤ  {indicador.nombre}
-                                            <br/>
-                                            </div>
-                                            :
-                                            <div/>
-                                    ))}
-                                </td>
+    return(
+    <div>
 
+    <table>
+        <thead>
+        <tr>
+            <th></th>
+            <th>ID del Indicador</th>
+            <th>Nombre del Indicador</th>
+            <th>Año</th>
+            <th>Meta propuesta</th>
+            <th>Tipo de solicitud</th>
+        </tr>
+        </thead>
+        <tbody>
+        {this.props.metas.map((meta) => (
+            meta.Aprobado === 0 ?
 
-                        {meta.Peticion === 'Añadir'?
-                            <td style={AStyle}>{meta.Peticion}</td>
-                            :
-                            <td style={DStyle}>{meta.Peticion}</td>}
-                    </tr>
-                    :
-                    <div/>
-                    ))
+            <tr key={meta.id}>
+                {meta.Peticion === 'Añadir' ?
+                <td>
+                    <input
+                    className='checkbox'
+                    type="checkbox"
+                    name="lang"
+                    value={meta.id}
+                    onChange={
+                        e => this.AClick(e)
+                        }/>
+                </td>
+                :
+                <td>
+                    <input
+                    className='checkbox'
+                    type="checkbox"
+                    name="lang"
+                    value={meta.id}
+                    onChange={
+                        e => this.DClick(e)
+                        }/>
+                </td>
                 }
-                </tbody>
-            </table>
-            
-            <div className="flex-row" style={{paddingTop : '25px'}}>
-                <div>
-                    <button onClick={
-                    () => this.onAprobarClick()
-                    }>Aprobar solicitudes</button>
-                </div>
-                <div style={{paddingLeft : '50px'}}>
-                    <button style={{background: 'red',  borderColor: 'red'}}
-                    onClick={
-                    () => this.onRechazarClick()
-                    }>Rechazar solicitudes</button>
-                </div>
+                <td>{meta.idindicador}</td>
 
-            </div>
+                <td>
+                    {this.props.indicadores.map((indicador) => (
+                        indicador.id === meta.idindicador ?
+                            <div>
+                            {indicador.nombre}
+                            </div>
+                            :
+                            <></>
+                    ))}
+                </td>
+                <td>{meta.fecha}</td>
+                <td>{meta.cantidad}</td>
 
-            </div>
-            );
-    }
+
+                {meta.Peticion === 'Añadir'?
+                    <td style={AStyle}>{meta.Peticion}</td>
+                    :
+                    <td style={DStyle}>{meta.Peticion}</td>}
+            </tr>
+            :
+            <div/>
+            ))
+        }
+        </tbody>
+    </table>
+    
+    <div className="flex-row" style={{paddingTop : '25px'}}>
+        <div>
+            <button onClick={
+            () => this.onAprobarClick()
+            }>Aprobar solicitudes</button>
+        </div>
+        <div style={{paddingLeft : '50px'}}>
+            <button style={{background: 'red',  borderColor: 'red'}}
+            onClick={
+            () => this.onRechazarClick()
+            }>Rechazar solicitudes</button>
+        </div>
+
+    </div>
+
+    </div>
+        );
+  }
 }
 
 export default ListaMetas;

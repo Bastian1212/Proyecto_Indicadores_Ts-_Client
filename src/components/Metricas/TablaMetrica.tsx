@@ -15,45 +15,56 @@ function TablaMetrica(props : any) {
         fetchPosts();
     }, []);
     return (
-        <table>
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Opción</th>
-            </tr>
-            </thead>
-            <tbody>
-            {metricas.map((metrica) => (
-                metrica.Aprobado === 1 ?
-                <tr key={metrica.id}>
-                    <td>{metrica.id}</td>
-                    <td>{metrica.nombre}</td>
-                    <td>
-                    {/* <button className="button muted-button">Edit</button> */}
-                    <button className="button muted-button delete" onClick={() => 
-                        clienteAxios.put(`/metricas/setpeticion/${metrica.id}`,
-                        window.location.reload(true))
-                        }>Eliminar</button>
-                    </td>
-                </tr>
-                :
-                metrica.Peticion === 'Añadir'?
-                <tr key={metrica.id} style={{backgroundColor: "#c6fbd8ad"}}>
-                <td>{metrica.id}</td>
-                <td>{metrica.nombre}</td>
-                <td style={{color: "green"}}>Peticion Añadir</td>
-                </tr>
-                :
-                <tr key={metrica.id} style={{backgroundColor: "#feb6b8a8"}}>
-                <td>{metrica.id}</td>
-                <td>{metrica.nombre}</td>
-                <td style={{color: "red"}}>Peticion Eliminar</td>
-                </tr>
-                ))
+            <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Opción</th>
+        </tr>
+        </thead>
+        <tbody>
+        {metricas.map((metrica) => (
+            metrica.Aprobado === 2 ?
+            <tr key={metrica.id} style={{backgroundColor: "#EEEDED", color: "#A7A4A4"}}>
+            {metrica.antiguaid === '0'?
+            <td>{metrica.id}</td>
+            :
+            <td>{metrica.antiguaid}</td>
             }
-            </tbody>
-        </table>
+            <td>{metrica.nombre}</td>
+            <td>Eliminado</td>
+            </tr>
+        :
+            metrica.Aprobado === 1 ?
+            <tr key={metrica.id}>
+                <td>{metrica.id}</td>
+                <td>{metrica.nombre}</td>
+                <td>
+                {/* <button className="button muted-button">Edit</button> */}
+                <button className="button muted-button delete" onClick={() => 
+                    clienteAxios.put(`metricas/setpeticion/${metrica.id}`,
+                    window.location.reload(true))
+                    }>Eliminar</button>
+                </td>
+            </tr>
+            :
+            metrica.Peticion === 'Añadir'?
+            <tr key={metrica.id} style={{backgroundColor: "#c6fbd8ad"}}>
+            <td>{metrica.id}</td>
+            <td>{metrica.nombre}</td>
+            <td style={{color: "green"}}>Peticion Añadir</td>
+            </tr>
+            :
+            <tr key={metrica.id} style={{backgroundColor: "#feb6b8a8"}}>
+            <td>{metrica.id}</td>
+            <td>{metrica.nombre}</td>
+            <td style={{color: "red"}}>Peticion Eliminar</td>
+            </tr>
+            ))
+        }
+        </tbody>
+    </table>
         
     )
 }

@@ -20,73 +20,74 @@ function TablaIndicadores() {
     return (
             <table>
             <thead>
-                <tr>
+            <tr>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Tipo de indicador</th>
                 <th>Eje</th>
                 <th>Responsable</th>
                 <th>Opción</th>
-                </tr>
+            </tr>
             </thead>
             <tbody>
-                {indicadores.map((indicador) => (
+            {indicadores.map((indicador) => (
                 indicador.Aprobado === 2 ?
                 <tr key={indicador.id} style={{backgroundColor: "#EEEDED", color: "#A7A4A4"}}>
-                    {indicador.antiguaid === '0'?
+                {indicador.antiguaid === '0'?
                     <td>{indicador.id}</td>
                     :
                     <td>{indicador.antiguaid}</td>
-                    }
-                    <td>{indicador.nombre}</td>
-                    <td>{indicador.TipoIndicador}</td>
-                    <td>{indicador.eje}</td>
-                    <td>{indicador.Responsable}</td>
-                    <td>Eliminado</td>
+                }
+                <td>{indicador.nombre}</td>
+                <td>{indicador.TipoIndicador}</td>
+                <td>{indicador.eje}</td>
+                <td>{indicador.Responsable}</td>
+                <td>Eliminado</td>
                 </tr>
-                :
+            :
                 indicador.Aprobado === 1 ?
-                    <tr key={indicador.id}>
-                    {indicador.antiguaid === '0'?
+                <tr key={indicador.id}>
+                {indicador.antiguaid === '0'?
                     <td>{indicador.id}</td>
                     :
                     <td>{indicador.antiguaid}</td>
-                    }
+                }
                     <td>{indicador.nombre}</td>
                     <td>{indicador.TipoIndicador}</td>
                     <td>{indicador.eje}</td>
                     <td>{indicador.Responsable}</td>
                     <td>
-                        {/* <button className="button muted-button">Edit</button> */}
-                        <button className="button muted-button delete" onClick={() => 
+                    {/* <button className="button muted-button">Edit</button> */}
+                    <button className="button muted-button delete" onClick={() => 
                         clienteAxios.put(`indicadores/setpeticion/${indicador.id}`,
-                        window.location.reload(true))
+                        window.location.reload(true)
+                        )
                         }>Eliminar</button>
                     </td>
-                    </tr>
+                </tr>
                 :
                 indicador.Peticion === 'Añadir'?
                 <tr key={indicador.id} style={{backgroundColor: "#c6fbd8ad"}}>
-                    <td>{indicador.id}</td>
-                    <td>{indicador.nombre}</td>
-                    <td>{indicador.TipoIndicador}</td>
-                    <td>{indicador.eje}</td>
-                    <td>{indicador.Responsable}</td>
-                    <td style={{color: "green"}}>Peticion Añadir</td>
+                <td>{indicador.id}</td>
+                <td>{indicador.nombre}</td>
+                <td>{indicador.TipoIndicador}</td>
+                <td>{indicador.eje}</td>
+                <td>{indicador.Responsable}</td>
+                <td style={{color: "green"}}>Peticion Añadir</td>
                 </tr>
                 :
                 <tr key={indicador.id} style={{backgroundColor: "#feb6b8a8"}}> 
-                    <td>{indicador.id}</td>
-                    <td>{indicador.nombre}</td>
-                    <td>{indicador.TipoIndicador}</td>
-                    <td>{indicador.eje}</td>
-                    <td>{indicador.Responsable}</td>
-                    <td style={{color: "red"}}>Peticion Eliminar</td>
+                <td>{indicador.id}</td>
+                <td>{indicador.nombre}</td>
+                <td>{indicador.TipoIndicador}</td>
+                <td>{indicador.eje}</td>
+                <td>{indicador.Responsable}</td>
+                <td style={{color: "red"}}>Peticion Eliminar</td>
                 </tr>
                 ))
-                }
+            }
             </tbody>
-            </table>
+        </table>
     )
 }
 

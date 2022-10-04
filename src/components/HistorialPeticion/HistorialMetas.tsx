@@ -1,7 +1,6 @@
 import React from 'react'
-import axios from 'axios'
 
-class HistorialMetricas extends React.Component {    
+class HistorialMetas extends React.Component {    
 
     render(){
         const AStyle = {
@@ -18,8 +17,10 @@ class HistorialMetricas extends React.Component {
         <table>
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Nombre</th>
+                <th>ID del Indicador</th>
+                <th>Nombre del Indicador</th>
+                <th>Año</th>
+                <th>Meta propuesta</th>
                 <th>Tipo de solicitud</th>
                 <th>Estado</th>
                 <th>ㅤFechaㅤ</th>
@@ -28,15 +29,67 @@ class HistorialMetricas extends React.Component {
             <tbody>
             {this.props.historial.map((historia) => (
                 <tr>
-                {this.props.metricas.map((metrica) => (
-                    historia.id_imm === metrica.id && historia.tipo === 3?
+                {this.props.metas.map((meta) => (
+                    historia.id_imm === meta.id && historia.tipo === 2?
                     <>
-                        {metrica.antiguaid === '0'?
-    
-                            <td>{metrica.id}</td>
+                        {meta.antiguaid === '0'?
+                            <>
+                            {this.props.indicadores.map((indicador) => (
+                                indicador.id === meta.idindicador ?
+                                <td>{indicador.id}</td>
+                                :
+                                <></>
+                            ))}
+                            </>
+
                             :
-                            <td>{metrica.antiguaid}</td>}
-                        <td>{metrica.nombre}</td>
+
+                            <>
+                            {this.props.indicadores.map((indicador) => (
+                                indicador.id === meta.antiguaid && indicador.antiguaid === '0'?
+                                <td>{indicador.id}</td>
+                            
+                                :
+                                indicador.id === meta.antiguaid?
+                                    <td>{indicador.antiguaid}</td>
+                                    :
+                                    <></>
+                                
+                            ))}
+                            </>
+
+                        }
+                            
+                        {meta.antiguaid === '0'?
+                            <>
+                            {this.props.indicadores.map((indicador) => (
+                                indicador.id === meta.idindicador ?
+                                <td>{indicador.nombre}</td>
+                                :
+                                <></>
+                            ))}
+                            </>
+
+                            :
+
+                            <>
+                            {this.props.indicadores.map((indicador) => (
+                                indicador.id === meta.antiguaid && indicador.antiguaid === '0'?
+                                <td>{indicador.nombre}</td>
+                            
+                                :
+                                indicador.id === meta.antiguaid?
+                                    <td>{indicador.nombre}</td>
+                                    :
+                                    <></>
+                                
+                            ))}
+                            </>
+
+                        }
+
+                        <td>{meta.fecha}</td>
+                        <td>{meta.cantidad}</td>
                         <td><b>{historia.solicitud}</b></td>
                         {historia.estado === 'Aprobado'?
                             <td style={AStyle}><b>{historia.estado}</b></td>
@@ -59,4 +112,4 @@ class HistorialMetricas extends React.Component {
       }
     }
 
-export default HistorialMetricas;
+export default HistorialMetas;

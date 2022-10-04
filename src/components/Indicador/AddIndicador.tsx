@@ -1,9 +1,12 @@
 import React from 'react'
 import axios from 'axios'
-import clienteAxios from "../../../config/axios"
-import Indicadores from '../../pages/Indicadores'
-import { Indicador } from '../../interfaces/Indicador'
-class AddIndicador extends React.Component   {
+import {ToastContainer, toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import clienteAxios from '../../../config/axios';
+
+
+class AddIndicador extends React.Component {
+
   state = {
     CalificacionCORFO : 'Mínimo',
     NumeroIndicador: '',
@@ -14,31 +17,125 @@ class AddIndicador extends React.Component   {
     Unidad : '',
     FuenteInformacion : '',
     Responsable: '',
-    Frecuencia: '',
+    Frecuencia: 'Diario',
     idMetrica: 0,
-    idMeta: 0
+
+    usado: false,
+    num: false,
+    nom: false,
+    uni: false,
+    fuent: false,
+    resp: false
   }
-  
+
   onAddClick = () => {
-      clienteAxios.post("indicadores/addindicadores" , {
-      id: (this.state.CalificacionCORFO.charAt(0) + this.state.NumeroIndicador), //string.charAt(0)
-      CalificacionCORFO : this.state.CalificacionCORFO,
-      NumeroIndicador : this.state.NumeroIndicador,
-      MisionUniversitaria : this.state.MisionUniversitaria,
-      nombre : this.state.nombre,
-      TipoIndicador: this.state.TipoIndicador,
-      eje : this.state.eje,
-      Unidad : this.state.Unidad,
-      FuenteInformacion : this.state.FuenteInformacion,
-      Responsable : this.state.Responsable,
-      Frecuencia : this.state.Frecuencia,
-      idMetrica : this.state.idMetrica,
-      idMeta : this.state.idMeta
-    })
+    var usado = false;
+
+    this.props.indicadores.map(x => x.id === (this.state.CalificacionCORFO.charAt(0) + this.state.NumeroIndicador) ?
+      usado = true
+      :x)
+
+    if(this.state.NumeroIndicador === '' || this.state.nombre === '' ||this.state.Unidad === '' || this.state.FuenteInformacion === '' || this.state.Responsable === '' || usado){
+      if (usado){
+        this.setState( {
+          usado : true,
+        })
+      }else{
+        this.setState( {
+          usado : false,
+        })  
+      }
+      if (this.state.NumeroIndicador === ''){
+        this.setState( {
+          num : true,
+        })
+      }else{
+        this.setState( {
+          num : false,
+        })  
+      }
+      if (this.state.nombre === ''){
+        this.setState( {
+          nom : true,
+        })
+      }else{
+        this.setState( {
+          nom : false,
+        })  
+      }
+      if (this.state.Unidad === ''){
+        this.setState( {
+          uni : true,
+        })
+      }else{
+        this.setState( {
+          uni : false,
+        })  
+      }
+      if (this.state.FuenteInformacion === ''){
+        this.setState( {
+          fuent : true,
+        })
+      }else{
+        this.setState( {
+          fuent : false,
+        })  
+      }
+      if (this.state.Responsable === ''){
+        this.setState( {
+          resp : true,
+        })
+      }else{
+        this.setState( {
+          resp : false,
+        })  
+      }
+      toast.error('Error! los campos no se llenaron correctamente', 
+        {position: toast.POSITION.TOP_CENTER, autoClose: 1000});
+    }else{
+
+      clienteAxios.post('indicadores/addindicadores',{
+        id: (this.state.CalificacionCORFO.charAt(0) + this.state.NumeroIndicador),
+        CalificacionCORFO : this.state.CalificacionCORFO,
+        NumeroIndicador : this.state.NumeroIndicador,
+        MisionUniversitaria : this.state.MisionUniversitaria,
+        nombre : this.state.nombre,
+        TipoIndicador: this.state.TipoIndicador,
+        eje : this.state.eje,
+        Unidad : this.state.Unidad,
+        FuenteInformacion : this.state.FuenteInformacion,
+        Responsable : this.state.Responsable,
+        Frecuencia : this.state.Frecuencia,
+        idMetrica : this.state.idMetrica,
+      })
+
+      this.setState( {
+        CalificacionCORFO : 'Mínimo',
+        NumeroIndicador: '',
+        MisionUniversitaria : 'Primera',
+        nombre : '',
+        TipoIndicador: 'Entrada resultado',
+        eje : 'Gobernanza y Sinergias',
+        Unidad : '',
+        FuenteInformacion : '',
+        Responsable: '',
+        Frecuencia: 'Diario',
+        idMetrica: 0,
+        num: false,
+        nom: false,
+        uni: false,
+        fuent: false,
+        resp: false,
+        usado: false
+      })
+      toast.success('Solicitud enviada correctamente', 
+        {position: toast.POSITION.TOP_CENTER, autoClose: 1000});
+    }
   }
 
   render(){
     return(
+      <>
       <form>
         <label>Calificación CORFO</label>
         <select value={this.state.CalificacionCORFO} onChange={e => this.setState({
@@ -49,9 +146,25 @@ class AddIndicador extends React.Component   {
         </select>
 
         <label>Número de Indicador</label>
-        <input type="text" value={this.state.NumeroIndicador} onChange={e => this.setState({
+        {this.state.usado?
+          <>
+          <input type="text" value={this.state.NumeroIndicador} style={{borderColor: 'red'}} onChange={e => this.setState({
           NumeroIndicador: e.target.value
-        })}/>
+          })}/>
+          <p style={{fontSize: '12px'}}>Ya existe un Indicador con esa id</p>
+          </>
+        : this.state.num?
+          <>
+          <input type="text" value={this.state.NumeroIndicador} style={{borderColor: 'red'}} onChange={e => this.setState({
+          NumeroIndicador: e.target.value
+          })}/>
+          <p style={{fontSize: '12px'}}>Este campo es obligatorio</p>
+          </>
+        :
+          <input type="text" value={this.state.NumeroIndicador} onChange={e => this.setState({
+            NumeroIndicador: e.target.value
+          })}/>
+        }
         
         <label>Misión Universitaria</label>
         <select value={this.state.MisionUniversitaria} onChange={e => this.setState({
@@ -62,10 +175,21 @@ class AddIndicador extends React.Component   {
           <option value="Tercera">Tercera</option>
           <option value="General">General</option>
         </select>
+
         <label>Nombre del indicador</label>
-        <input type="text" value={this.state.nombre} onChange={e => this.setState({
-          nombre: e.target.value
-        })}/>
+        {this.state.nom?
+          <>
+          <input type="text" value={this.state.nombre}  style={{borderColor: 'red'}}onChange={e => this.setState({
+            nombre: e.target.value
+          })}/>
+          <p style={{fontSize: '12px'}}>Este campo es obligatorio</p>
+          </>
+        :
+          <input type="text" value={this.state.nombre} onChange={e => this.setState({
+            nombre: e.target.value
+          })}/>
+        }
+
         <label>Tipo de Indicador</label>
         <select value={this.state.TipoIndicador} onChange={e => this.setState({
           TipoIndicador: e.target.value
@@ -75,6 +199,7 @@ class AddIndicador extends React.Component   {
           <option value="Proceso">Proceso</option>
           <option value="Impacto">Impacto</option>
         </select>
+
         <label>Eje al que pertenece</label>
         <select value={this.state.eje} onChange={e => this.setState({
           eje: e.target.value
@@ -86,23 +211,63 @@ class AddIndicador extends React.Component   {
           <option value="Alianzas Internacionales">Alianzas Internacionales</option>
           <option value=" Armonización Curricular y postgrados tecnológicos"> Armonización Curricular y postgrados tecnológicos</option>
         </select>
+
          <label>Unidad de medida</label>
-        <input type="text" value={this.state.Unidad} onChange={e => this.setState({
-          Unidad: e.target.value
-        })}/>
+
+        {this.state.uni?
+          <>
+          <input type="text" value={this.state.Unidad} style={{borderColor: 'red'}} onChange={e => this.setState({
+            Unidad: e.target.value
+          })}/>
+          <p style={{fontSize: '12px'}}>Este campo es obligatorio</p>
+          </>
+        :
+          <input type="text" value={this.state.Unidad} onChange={e => this.setState({
+            Unidad: e.target.value
+          })}/>
+        }
+
         <label>Fuente de Informacion</label>
+
+        {this.state.fuent?
+          <>
+          <input type="text" value={this.state.FuenteInformacion} style={{borderColor: 'red'}} onChange={e => this.setState({
+            FuenteInformacion: e.target.value
+          })}/>
+          <p style={{fontSize: '12px'}}>Este campo es obligatorio</p>
+          </>
+        :
         <input type="text" value={this.state.FuenteInformacion} onChange={e => this.setState({
           FuenteInformacion: e.target.value
         })}/>
-        <label>Responsable</label>
-        <input type="text" value={this.state.Responsable} onChange={e => this.setState({
-          Responsable: e.target.value
-        })}/>
-        <label>Frecuencia de medición</label>
-        <input type="text" value={this.state.Frecuencia} onChange={e => this.setState({
-          Frecuencia: e.target.value
-        })}/>
+        }
 
+        <label>Responsable</label>
+
+        {this.state.resp?
+          <>
+          <input type="text" value={this.state.Responsable} style={{borderColor: 'red'}} onChange={e => this.setState({
+            Responsable: e.target.value
+          })}/>
+          <p style={{fontSize: '12px'}}>Este campo es obligatorio</p>
+          </>
+        :
+          <input type="text" value={this.state.Responsable} onChange={e => this.setState({
+            Responsable: e.target.value
+          })}/>
+        }
+        
+        <label>Frecuencia de medición</label>
+        <select value={this.state.Frecuencia} onChange={e => this.setState({
+          Frecuencia: e.target.value
+        })}>
+          <option value="Diario">Diario</option>
+          <option value="Semanal">Semanal</option>
+          <option value="Mensual">Mensual</option>
+          <option value="Trimestral">Trimestral</option>
+          <option value="Semestral">Semestral</option>
+          <option value="Anual">Anual</option>
+        </select>
 
         <label>Metrica</label>
         <select value={this.state.idMetrica} onChange={e => this.setState({
@@ -116,26 +281,15 @@ class AddIndicador extends React.Component   {
           <div/>
           )}
         </select>
-
-        <label>Meta</label>
-        <select value={this.state.idMeta} onChange={e => this.setState({
-          idMeta: e.target.value
-        })}>
-          <option value={0}>-</option>
-          {this.props.metas.map((x, i) => 
-          x.Aprobado === 1 ?
-          <option value={x.id}>{x.nombre}</option>
-          :
-          <div/>
-          )}
-        </select>
-
-        <button onClick={
+        
+      </form>
+      <button onClick={
           () => this.onAddClick()
         }>Enviar solicitud</button>
-      </form>
+      <ToastContainer theme="colored"/>
+      </>
     );
   }
 }
 
-export default AddIndicador
+export default AddIndicador;
