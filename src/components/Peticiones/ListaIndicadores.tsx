@@ -1,5 +1,8 @@
 import React from 'react'
 import axios from 'axios'
+
+import dateFormat, {masks} from "dateformat";
+
 import clienteAxios from '../../../config/axios'
 class ListaIndicadores extends React.Component {    
 
