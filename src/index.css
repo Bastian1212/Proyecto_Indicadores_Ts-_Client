@@ -1035,7 +1035,9 @@ caption {
 
 
  .historial{
-  padding-top: 30px;
+  position: absolute;
+  top: 90px;
+  right: 200px;
   height: 50px;
   width: 50px;
   text-decoration:none;
