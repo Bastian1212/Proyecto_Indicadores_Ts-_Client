@@ -54,10 +54,10 @@ function HistorialPeticines() {
             <div className="flex-row">
             <div className="flex-large">
                 <h2>Indicadores</h2>
-                <HistorialIndicadores indicadores={indicadores} historial={historial}/>
+                    <HistorialIndicadores indicadores={indicadores} historial={historial}/>
             
                 <h2>Métricas</h2>
-                <HistorialMetricas metricas={metricas} indicadores={indicadores} historial={historial}/>
+                    <HistorialMetricas metricas={metricas} indicadores={indicadores} historial={historial}/>
 
                 <h2>Metas</h2>
                 <HistorialMetas metas={metas} indicadores={indicadores} historial={historial}/>

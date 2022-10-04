@@ -6,40 +6,41 @@ import AddIndicador from '../components/Indicador/AddIndicador';
 import TablaIndicadores from '../components/Indicador/TablaIndicadores';
 import clienteAxios from '../../config/axios';
 
-function Indicadores() {
-    const [metricas, setMetricas] = useState([]);
-    const [metas, setMetas] = useState([]);
-    useEffect(() => {
-        const fetchPosts = async () => {
-          const res = await clienteAxios.get('metricas/lista');
-          setMetricas(res.data);
-        };
-        fetchPosts();
-      }, );
-    
-      useEffect(() => {
-        const fetchPosts = async () => {
-          const res = await clienteAxios.get('metas/lista');
-          setMetas(res.data);
-        };
-        fetchPosts();
-      }, );
+export default function Indicadores() {
 
-    return (
-        <div className="container">
-          <div className="flex-row">
-            <div className="flex-large">
-              <h2>Añadir Indicador</h2>
-              <AddIndicador metricas={metricas} metas={metas}/>
-            </div>
-            <div className="flex-large">
-              <h2>Ver Indicadores</h2>
-    
-              <TablaIndicadores/>
-            </div>
-          </div>
+  const [metricas, setMetricas] = useState([]);
+  const [indicadores, setIndicadores] = useState([]);
+
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const res = await clienteAxios.get('indicadores/lista');
+      setIndicadores(res.data);
+    };
+    fetchPosts();
+  }, );
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const res = await clienteAxios.get('metricas/lista');
+      setMetricas(res.data);
+    };
+    fetchPosts();
+  }, );
+
+  return (
+    <div className="container">
+      <div className="flex-row">
+        <div className="flex-large">
+          <h2>Añadir Indicador</h2>
+          <AddIndicador metricas={metricas} indicadores={indicadores}/>
         </div>
-      );
-}
+        <div className="flex-large">
+          <h2>Ver Indicadores</h2>
 
-export default Indicadores
+          <TablaIndicadores/>
+        </div>
+      </div>
+    </div>
+  );
+}
